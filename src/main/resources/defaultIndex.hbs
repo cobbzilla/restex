@@ -1,0 +1,85 @@
+<html>
+    <head>
+        <title>Examples of all HTTP exchanges with this app</title>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <style type="text/css">
+            a{
+                color: white;
+                text-decoration: inherit;
+                font-variant: small-caps;
+                font-family: sans-serif;
+            }
+            .container{
+                width: 500px;
+                padding: 10px;
+                font-family: sans-serif;
+            }
+            .item{ margin: 10px; font-family: sans-serif;}
+            .subItem{ margin: 5px; font-family: sans-serif;}
+            .container li > a > span {
+                float: right;
+                font-size: 19px;
+                font-weight: bolder;
+                font-family: sans-serif;
+            }
+            .container li > a > span {
+                width: 20px;
+                height: 20px;
+                text-align: center;
+                font-family: sans-serif;
+            }
+            .container li.open > a > span:after { content: '\25b4'; }
+            .container li > a > span:after { content: '\25be'; }
+            .container li { list-style: none; }
+            .ic{ margin: 5px; }
+            .itemC{
+                margin: 5px;
+                padding: 5px;
+                padding-top: 9px;
+                min-height: 22px;
+                border-radius: 5px;
+                background-color: #03A2CC;
+                font-family: sans-serif;
+            }
+        </style>
+    </head>
+    <body>
+
+        <ul class="container">
+
+            {{#each files}}
+            <li class="itemC">
+                <a class="item" href="{{fsPath}}"><span class="openItem"></span>{{context}}</a>
+                <ul class="subItem">
+
+                    {{#each examples}}
+                    <li class="ic">
+                        <a href="{{fsPath}}#{{anchor}}">{{description}}</a>
+                    </li>
+                    {{/each}}
+
+                </ul>
+            </li>
+            {{/each}}
+            <!-- @@MORE-INDEX-FILES@@ -->
+        </ul>
+
+    </body>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var $subitem = $(".subitem");
+            $subitem.hide();
+            $('.itemC').removeClass('open');
+            $('.openItem').on("click", function (e) {
+                e.preventDefault();
+                isOpened = $($(this).parent().parent()).hasClass('open');
+                $('.itemC').removeClass('open');
+                $subitem.hide();
+                if(!isOpened){
+                    $('.subitem', $(this).parent().parent()).show();
+                    $($(this).parent().parent()).addClass('open');
+                }
+            });
+        });
+    </script>
+</html>

@@ -1,0 +1,14 @@
+{{#each files}}
+    <li class="itemC">
+        <a class="item" href="{{fsPath}}"><span class="openItem"></span>{{context}}</a>
+        <ul class="subItem">
+
+            {{#each examples}}
+                <li class="ic">
+                    <a href="{{fsPath}}#{{anchor}}">{{description}}</a>
+                </li>
+            {{/each}}
+
+        </ul>
+    </li>
+{{/each}}

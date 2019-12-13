@@ -1,0 +1,69 @@
+<a name="{{anchor}}"></a>
+
+<div class="request_details" style="margin-top: 10px"><p class="title">TEST CASE: {{http.comment}}</p></div>
+
+<table>
+    <thead>
+        <tr><td class="summary" colspan="4">SUMMARY</td></tr>
+        <tr>
+            <td class="type_column">Type</td>
+            <td >Request</td>
+            <td class="response_column">Response</td>
+            <td >Notes</td>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each http.captures}}
+        <tr>
+            <td nowrap=""><div class="block margin_0">{{requestMethod}}</div></td>
+            <td nowrap=""><a href="#{{anchor}}_{{@index}}">{{requestUri}}</a></td>
+            <td nowrap="">{{responseLine}}</td>
+            <td nowrap="">{{nl2br note}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+{{#each http.captures}}
+
+    <a name="{{anchor}}_{{@index}}"></a>
+
+    <div class="request_details">
+        <div class="block margin_0" style="margin-right: 5px">{{requestMethod}}</div>{{requestUri}}
+        <div class="request_description">{{nl2br note}}</div>
+    </div>
+
+    <div class="request_response_container">
+        <p class="request">Request</p>
+
+        <p class="item_description">header</p>
+        <div class="request_header">
+            {{#each requestHeaderList}}
+                <p >{{this}}</p>
+            {{/each}}
+        </div>
+
+        <p class="item_description">body</p>
+        <div class="request_body">
+            <pre>{{{requestEntity}}}</pre>
+        </div>
+    </div>
+
+    <div class="request_response_container">
+        <p class="request">Response</p>
+
+        <p class="item_description">header</p>
+        <div class="request_header">
+            <p >{{responseLine}}</p>
+            {{#each responseHeaderList}}
+                <p>{{this}}<p/>
+            {{/each}}
+        </div>
+
+        <p class="item_description">body</p>
+        <div class="request_body">
+        <pre>{{{responseEntity}}}</pre>
+        </div>
+    </div>
+
+{{/each}}
